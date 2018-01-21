@@ -1,22 +1,15 @@
 package com.kraskovski.auth0.controller;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 
-@SuppressWarnings("unused")
-@Controller
+@RestController
 public class LogoutController {
 
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
-
-    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    @GetMapping("/logout")
     protected String logout(final HttpServletRequest req) {
-        logger.debug("Performing logout");
         invalidateSession(req);
         return "redirect:" + req.getContextPath() + "/login";
     }

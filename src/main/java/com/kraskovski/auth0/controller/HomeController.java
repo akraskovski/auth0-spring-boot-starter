@@ -1,29 +1,20 @@
 package com.kraskovski.auth0.controller;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
 import java.util.Map;
 
-@SuppressWarnings("unused")
-@Controller
+@RestController
 public class HomeController {
 
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
-
-    @RequestMapping(value = "/portal/home", method = RequestMethod.GET)
+    @GetMapping("/home")
     protected String home(final Map<String, Object> model, final Principal principal) {
-        logger.info("Home page");
         if (principal == null) {
             return "redirect:/logout";
         }
         model.put("userId", principal);
         return "home";
     }
-
 }
