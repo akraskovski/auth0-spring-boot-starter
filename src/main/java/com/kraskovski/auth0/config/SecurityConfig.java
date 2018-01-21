@@ -1,12 +1,14 @@
 package com.kraskovski.auth0.config;
 
-import com.auth0.spring.security.api.JwtWebSecurityConfigurer;
+import com.auth0.AuthenticationController;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+
+import java.io.UnsupportedEncodingException;
 
 /**
  * Configuration class using Auth0.
@@ -15,21 +17,38 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Value("${auth0.apiAudience}")
-    private String apiAudience;
-    @Value("${auth0.issuer}")
-    private String issuer;
+    @Value("${auth0.domain}")
+    private String domain;
+    @Value("${auth0.clientId}")
+    private String clientId;
     @Value("${auth0.clientSecret}")
-    private String secret;
+    private String clientSecret;
+
+    @Bean
+    public AuthenticationController authenticationController() {
+        return AuthenticationController.newBuilder(domain, clientId, clientSecret)
+                .build();
+    }
 
     @Override
-    protected void configure(final HttpSecurity http) throws Exception {
-        JwtWebSecurityConfigurer
-                .forHS256(apiAudience, issuer, secret.getBytes())
-                .configure(http)
-                .csrf().disable()
+    protected void configure(HttpSecurity http) throws Exception {
+        http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.GET, "/login").permitAll()
-                .anyRequest().authenticated();
+                .antMatchers("/callback", "/login").permitAll()
+                .antMatchers("/**").authenticated()
+                .and()
+                .logout().permitAll();
+    }
+
+    public String getDomain() {
+        return domain;
+    }
+
+    public String getClientId() {
+        return clientId;
+    }
+
+    public String getClientSecret() {
+        return clientSecret;
     }
 }
