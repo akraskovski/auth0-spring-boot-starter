@@ -34,12 +34,12 @@ public class LoginController {
     }
 
     @GetMapping("/login")
-    protected String login(final HttpServletRequest req) {
-        final String redirectUri = req.getScheme() + "://" + req.getServerName() + ":" + req.getServerPort() + "/callback";
+    protected void login(final HttpServletRequest req, final HttpServletResponse res) throws IOException {
+        final String redirectUri = String.format("%s://%s:%d/callback", req.getScheme(), req.getServerName(), req.getServerPort());
         final String authorizeUrl = auth0Controller.buildAuthorizeUrl(req, redirectUri)
                 .withAudience(String.format("https://%s/userinfo", domain))
                 .build();
-        return "redirect:" + authorizeUrl;
+        res.sendRedirect(authorizeUrl);
     }
 
     @GetMapping("/callback")
