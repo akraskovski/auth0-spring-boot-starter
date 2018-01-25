@@ -1,29 +1,5 @@
-### Java template
-# Compiled class file
-*.class
-
-# Log file
-*.log
-
-# Package Files #
-*.jar
-*.war
-*.ear
-*.zip
-*.tar.gz
-*.rar
-
-### Maven template
-target/
-
-# Avoid ignoring Maven wrapper jar file (.jar files are usually ignored)
-!/.mvn/wrapper/maven-wrapper.jar
-
-# User-specific stuff:
-.idea/**/workspace.xml
-.idea/**/tasks.xml
-.idea/dictionaries
-
-# IntelliJ
-out/
-/.idea/
+/server-client/target/
+/server-client/auth0-spring-boot-starter.iml
+/sso/target/
+/sso/auth0-spring-boot-starter (1).iml
+/.idea
