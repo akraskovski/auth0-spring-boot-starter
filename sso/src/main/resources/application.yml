@@ -1,0 +1,6 @@
+# Auth0 configuration properties
+auth0:
+  domain: akraskovski.auth0.com
+  apiAudience: https://akraskovski.auth0.com/api/v2/
+  clientId: 6mg-aiPLpDfPMrWhvV-PFbscv_AY-6d-
+  clientSecret: _ahZ18G7VPw1O23th0Q3xO1dRmK_Hy2Lqil9mOXdt8bC1sJE6OgX2pOUuNfaTSu5

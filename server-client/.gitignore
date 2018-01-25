@@ -27,6 +27,3 @@ target/
 # IntelliJ
 out/
 /.idea/
-/sso/.idea/
-/sso/target/
-/sso/auth0-spring-boot-starter.iml

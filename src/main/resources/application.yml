@@ -1,6 +1,0 @@
-# Auth0 configuration properties
-auth0:
-  domain: YOUR_DOMAIN
-  apiAudience: APIS
-  clientId: YOUR_CLIENT_ID
-  clientSecret: YOUR_CLIENT_SECRET
