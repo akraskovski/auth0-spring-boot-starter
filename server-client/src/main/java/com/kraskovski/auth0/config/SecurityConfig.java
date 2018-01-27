@@ -25,7 +25,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(final HttpSecurity http) throws Exception {
         JwtWebSecurityConfigurer
-                .forHS256(apiAudience, issuer, secret.getBytes())
+                .forRS256(apiAudience, issuer)
                 .configure(http)
                 .csrf().disable()
                 .authorizeRequests()
