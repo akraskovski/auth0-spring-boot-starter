@@ -17,15 +17,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Value("${auth0.apiAudience}")
     private String apiAudience;
-    @Value("${auth0.issuer}")
-    private String issuer;
-    @Value("${auth0.clientSecret}")
-    private String secret;
+    @Value("${auth0.domain}")
+    private String domain;
 
     @Override
     protected void configure(final HttpSecurity http) throws Exception {
         JwtWebSecurityConfigurer
-                .forRS256(apiAudience, issuer)
+                .forRS256(apiAudience, domain)
                 .configure(http)
                 .csrf().disable()
                 .authorizeRequests()

@@ -1,5 +1,4 @@
 # Auth0 configuration properties
 auth0:
-  issuer: YOUR_DOMAIN
+  domain: YOUR_DOMAIN
   apiAudience: YOUR_API_AUIDENCE
-  clientSecret: YOUR_SECRET_KEY
